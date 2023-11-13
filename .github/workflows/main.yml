@@ -1,9 +1,9 @@
 name: Check Python Version
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [master]
 
 jobs:
   check-python-version:
