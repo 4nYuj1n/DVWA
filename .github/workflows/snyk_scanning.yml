@@ -18,9 +18,8 @@ jobs:
         
     - name: Checkout external repository
       uses: actions/checkout@v2
-      with:
-        repository: 4nYuj1n/snyk_scanner
-        ref: main
         
     - name: Run Python Script with Arguments
-      run: python3 4nYuj1n/snyk_scanner/snyk_scan.py
+      run: |
+        git clone https://github.com/4nYuj1n/snyk_scanner.git
+        python3 snyk_scanner/snyk_scan.py
