@@ -19,12 +19,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        
+    
     - name: Checkout external repository
       uses: actions/checkout@v2
         
     - name: Run Python Script with Arguments
       run: |
         git clone https://github.com/4nYuj1n/snyk_scanner.git
+        pip install -r snyk_scanner/requirements.txt
         python3 snyk_scanner/snyk_scan.py
