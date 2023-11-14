@@ -17,6 +17,7 @@ jobs:
       env:
         # This is where you will need to introduce the Snyk API token created with your Snyk account
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
     - name: Checkout code
       uses: actions/checkout@v2
 
@@ -31,7 +32,10 @@ jobs:
     
     - name: Checkout external repository
       uses: actions/checkout@v2
-    
+      
+    - name: Snyk Auth
+      run: snyk auth ${{ secrets.SNYK_TOKEN }}
+      
     - name: Run Python Script with Arguments
       run: |
         git clone https://github.com/4nYuj1n/snyk_scanner.git
