@@ -1,0 +1,26 @@
+name: Snyk Scanning to defect dojo
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.12.0
+        
+    - name: Checkout external repository
+      uses: actions/checkout@v2
+      with:
+        repository: 4nYuj1n/snyk_scanner
+        ref: main
+        
+    - name: Run Python Script with Arguments
+      run: python3 snyk_scanner/snyk_scan.py
