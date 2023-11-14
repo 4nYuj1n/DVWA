@@ -36,9 +36,6 @@ jobs:
     - name: Snyk Auth
       run: snyk auth ${{ secrets.SNYK_TOKEN }}
       
-    - name: Snyk Code
-      run: snyk code test --json >  snyk_out.json
-      
     - name: Run Python Script with Arguments
       run: |
         git clone https://github.com/4nYuj1n/snyk_scanner.git
