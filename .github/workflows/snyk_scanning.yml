@@ -40,4 +40,4 @@ jobs:
       run: |
         git clone https://github.com/4nYuj1n/snyk_scanner.git
         pip install -r snyk_scanner/requirements.txt
-        python3 snyk_scanner/snyk_scan.py -k ${{ secrets.defect_dojo_token }} -u http://34.143.232.249:8080 -f .. -p custody.depository.id
+        python3 snyk_scanner/snyk_scan.py -k ${{ secrets.DEFECT_DOJO_TOKEN }} -u http://34.143.232.249:8080 -f .. -p custody.depository.id
