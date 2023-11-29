@@ -17,7 +17,25 @@ jobs:
       env:
         # This is where you will need to introduce the Snyk API token created with your Snyk account
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: install ovpn
+      run: |
+        sudo apt update
+        sudo apt install -y openvpn openvpn-systemd-resolved
+        echo "${{ secrets.CLIENT_OVPN }}" > .github/workflows/client.ovpn
+    - name: Connect to VPN
+      uses: "kota65535/github-openvpn-connect-action@v2"
+      with:
+        config_file: .github/workflows/client.ovpn
+    - name: install ssh keys
+      # check this thread to understand why its needed:
+      # https://stackoverflow.com/a/70447517
+      run: |
+        install -m 600 -D /dev/null ~/.ssh/id_ed25519
+        echo "${{ secrets.PROD_SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+        ssh-keyscan -H ${{ secrets.PROD_SSH_HOST }} > ~/.ssh/known_hosts
+        
     - name: Checkout code
       uses: actions/checkout@v2
 
